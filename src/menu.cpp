@@ -76,6 +76,7 @@ namespace Menu
         CreateDefaultSettings();
         std::ifstream defaultSettingsFile("save/config.json");
         json data;
-        ///TODO: parse settings
+        defaultSettingsFile>>data;
+        ///TODO: finish this function
     }
 }
