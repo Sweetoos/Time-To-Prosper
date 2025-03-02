@@ -1,11 +1,12 @@
 #pragma once
+#include <string>
 
 namespace Menu
 {
-    bool runnable=true;
+    extern bool runnable;
     /// @brief function responsible for creating config.json file if it doesn't exist
     void CreateDefaultSettings();
-    void ReadDefaultSettings();
+    void ReadDefaultSettings(std::string &language);
     void Run();
     void DisplayMenu();
 }

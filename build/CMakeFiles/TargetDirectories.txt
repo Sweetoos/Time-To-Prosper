@@ -1,0 +1,3 @@
+/Users/kacper/projects/time_to_prosper/build/CMakeFiles/run.dir
+/Users/kacper/projects/time_to_prosper/build/CMakeFiles/edit_cache.dir
+/Users/kacper/projects/time_to_prosper/build/CMakeFiles/rebuild_cache.dir

@@ -1,5 +1,53 @@
 {
-    "welcome":{
-        
+    "menu":{
+        "title":{
+            "en":"Main Menu",
+            "pl":"Menu Główne"
+        },
+        "options":[
+            {
+                "id":1,
+                "text":{
+                    "en":"Start Game",
+                    "pl":"Rozpocznij Grę"
+                }
+            },
+            {
+                "id":2,
+                "text":{
+                    "en":"Settings",
+                    "pl":"Ustawienia"
+                }
+            },
+            {
+                "id":3,
+                "text":{
+                    "en":"Exit",
+                    "pl":"Wyjdź"
+                }
+            }
+        ]
+    },
+    "logs":{
+        "startGame":{
+            "en":"Starting the game...",
+            "pl":"Rozpoczynanie gry..."
+        },
+        "openSettings":{
+            "en":"Opening settings...",
+            "pl":"Otwieranie ustawień..."
+        },
+        "exitGame":{
+            "en":"Exiting the game...",
+            "pl":"Wychodzenie z gry..."
+        },
+        "invalidOption":{
+            "en":"Invalid option selected!",
+            "pl":"Wybrano nieprawidłową opcję!"
+        } 
+    },
+    "choice":{
+        "en":"Choice: ",
+        "pl":"Wybór: "
     } 
 }

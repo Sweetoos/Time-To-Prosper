@@ -4,12 +4,14 @@
 #include <iostream>
 #include <filesystem>
 
-#include <lib/json/include/nlohmann/json.hpp>
+#include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
 
 namespace Menu
 {
+    bool runnable = true;
+
     void Run()
     {
         try
@@ -39,7 +41,33 @@ namespace Menu
 
     void DisplayMenu()
     {
+        try
+        {
+            std::string language;
+            ReadDefaultSettings(language);
+            std::ifstream menuFile("local/menu.json");
+            std::ifstream configFile("save/config.json");
+            if (!menuFile.is_open())
+            {
+                throw std::runtime_error("couldn't read menu.json file\t func: DisplayMenu");
+            }
+            json data;
+            menuFile >> data;
+            json config;
+            configFile >> config;
+
+            std::cout << data["menu"]["title"][language] << '\n';
+            for (const auto &option : data["menu"]["options"])
+            {
+                std::cout << option["id"] << ". " << option["text"][language] << '\n';
+            }
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
+
     void CreateDefaultSettings()
     {
         try
@@ -52,12 +80,14 @@ namespace Menu
                 if (!fs::create_directory(saveFolder))
                     throw std::runtime_error("couldn't create save folder\t func: CreateDefaultSettings");
             }
+
+            json config;
+            config["language"] = "en";
+
             std::ofstream configFile(configFileName);
             if (configFile.is_open())
             {
-                configFile << R"({
-                    "language": "en"
-                })";
+                configFile << config.dump(4);
                 configFile.close();
             }
             else
@@ -71,12 +101,45 @@ namespace Menu
             return;
         }
     }
-    void ReadDefaultSettings()
+
+    void ReadDefaultSettings(std::string &language)
     {
-        CreateDefaultSettings();
-        std::ifstream defaultSettingsFile("save/config.json");
-        json data;
-        defaultSettingsFile>>data;
-        ///TODO: finish this function
+        try
+        {
+            namespace fs = std::filesystem;
+            if (!fs::exists("save/config.json"))
+            {
+                CreateDefaultSettings();
+            }
+
+            std::ifstream defaultSettingsFile("save/config.json");
+            if (!defaultSettingsFile.is_open())
+            {
+                throw std::runtime_error("couldn't open config file\t func: ReadDefaultSettings");
+            }
+
+            json data;
+            defaultSettingsFile >> data;
+            defaultSettingsFile.close();
+
+            if (data.contains("language"))
+            {
+                language = data["language"].get<std::string>();
+            }
+            else
+            {
+                throw std::runtime_error("invalid config file format\t func: ReadDefaultSettings");
+            }
+        }
+        catch (const json::parse_error &e)
+        {
+            std::cerr << "JSON parsing error: " << e.what() << '\n';
+            language = "en";
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << "Error: " << e.what() << '\n';
+            language = "en";
+        }
     }
 }
