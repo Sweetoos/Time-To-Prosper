@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
+#include <vector>
 
 #include <nlohmann/json.hpp>
 
@@ -46,20 +47,42 @@ namespace Menu
             std::string language;
             ReadDefaultSettings(language);
             std::ifstream menuFile("local/menu.json");
-            std::ifstream configFile("save/config.json");
             if (!menuFile.is_open())
             {
                 throw std::runtime_error("couldn't read menu.json file\t func: DisplayMenu");
             }
             json data;
             menuFile >> data;
-            json config;
-            configFile >> config;
+            std::vector<MenuOption> options;
 
-            std::cout << data["menu"]["title"][language] << '\n';
-            for (const auto &option : data["menu"]["options"])
+            for (const auto &option : data["menu"]["mainMenuOptions"])
             {
-                std::cout << option["id"] << ". " << option["text"][language] << '\n';
+                MenuOption menuOption{
+                    option["id"].get<int>(),
+                    option["text"][language].get<std::string>()};
+                options.push_back(menuOption);
+            }
+
+            std::cout << data["menu"]["title"][language].get<std::string>() << '\n';
+            for (const auto &option : options)
+            {
+                std::cout << option.id << ". " << option.text << '\n';
+            }
+            std::cout << data["choice"][language].get<std::string>() << ": ";
+            int choice;
+            std::cin >> choice;
+
+            auto it = std::find_if(options.begin(), options.end(),
+                                   [choice](const MenuOption &opt)
+                                   { return opt.id == choice; });
+
+            if (it != options.end())
+            {
+                /// @todo implement menu options
+            }
+            else
+            {
+                std::cout << "invalid choice\n";
             }
         }
         catch (const std::exception &e)

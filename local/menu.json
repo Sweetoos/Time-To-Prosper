@@ -4,7 +4,7 @@
             "en":"Main Menu",
             "pl":"Menu Główne"
         },
-        "options":[
+        "mainMenuOptions":[
             {
                 "id":1,
                 "text":{
@@ -15,12 +15,19 @@
             {
                 "id":2,
                 "text":{
+                    "en": "Load Game",
+                    "pl": "Wczytaj Grę"
+                }
+            },
+            {
+                "id":3,
+                "text":{
                     "en":"Settings",
                     "pl":"Ustawienia"
                 }
             },
             {
-                "id":3,
+                "id":4,
                 "text":{
                     "en":"Exit",
                     "pl":"Wyjdź"
@@ -47,7 +54,7 @@
         } 
     },
     "choice":{
-        "en":"Choice: ",
-        "pl":"Wybór: "
+        "en":"Choice",
+        "pl":"Wybór"
     } 
 }
