@@ -8,7 +8,6 @@ namespace Menu
     {
         int id;
         std::string text;
-        // Add any additional fields you need for menu options
     };
 
     extern bool runnable;
@@ -18,5 +17,6 @@ namespace Menu
     void Run();
 
     /// @brief function responsible for displaying menu options
-    void DisplayMenu(); // Removed template
+    void DisplayMenu(); 
+    void HandleNewGame();
 }

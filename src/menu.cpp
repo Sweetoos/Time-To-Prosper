@@ -78,11 +78,22 @@ namespace Menu
 
             if (it != options.end())
             {
-                /// @todo implement menu options
+                switch (it->id)
+                {
+                case 1:
+                    HandleNewGame();
+                    break;
+                case 2:
+                    std::cout << "Option 2 selected\n";
+                    break;
+                default:
+                    std::cout << "Option not implemented yet\n";
+                    break;
+                }
             }
             else
             {
-                std::cout << "invalid choice\n";
+                std::cout << "Invalid choice\n";
             }
         }
         catch (const std::exception &e)
@@ -164,5 +175,17 @@ namespace Menu
             std::cerr << "Error: " << e.what() << '\n';
             language = "en";
         }
+    }
+
+    void HandleNewGame()
+    {
+        json data;
+        std::ifstream file("local/menu.json");
+        if (!file.is_open())
+        {
+            throw std::runtime_error("couldn't read menu.json file\t func: HandleNewGame");
+        }
+        file>>data;
+        std::string language;
     }
 }
