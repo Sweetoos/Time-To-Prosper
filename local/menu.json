@@ -1,5 +1,18 @@
 {
-    "welcome":{
-        
-    } 
+    "welcome": {
+        "en": "Welcome",
+        "pl": "Witam"
+    },
+    "start_new_game": {
+        "en": "Start new game",
+        "pl": "Rozpocznij nową grę"
+    },
+    "load_game": {
+        "en": "Load game",
+        "pl": "Wczytaj grę"
+    },
+    "exit_game":{
+        "en": "Exit game",
+        "pl": "Wyjdź z gry"
+    }
 }

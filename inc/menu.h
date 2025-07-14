@@ -1,11 +1,12 @@
 #pragma once
+#include "app.h"
 
-namespace Menu
+class Menu : public App
 {
-    bool runnable=true;
-    /// @brief function responsible for creating config.json file if it doesn't exist
-    void CreateDefaultSettings();
-    void ReadDefaultSettings();
-    void Run();
+private:
+    
+
+public:
     void DisplayMenu();
-}
+
+};
